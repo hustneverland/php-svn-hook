@@ -31,6 +31,8 @@ abstract class BasePreCommitCheck
             $this->globalError[] = $result;
         }
 
+        $this->checkJiraComment(array_keys($svnCommitedFiles));
+
         // Check on the files
         foreach ($svnCommitedFiles as $filename => $lines) {
 
@@ -52,6 +54,10 @@ abstract class BasePreCommitCheck
     public function fail()
     {
         return count($this->globalError) > 0 || count($this->codeError) > 0;
+    }
+
+    public function checkJiraComment($svnCommitedFiles)
+    {
     }
 
     public function checkSvnComment($comment)
